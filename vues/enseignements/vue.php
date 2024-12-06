@@ -28,11 +28,11 @@ if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == "delete")
 
 <table border="1">
 	<tr>
-		<td>Nom</td>
-		<td>Prénom</td>
-		<td>Email</td>
+		<td>Matière</td>
+		<td>Nombre d'heures</td>
+		<td>Coeff</td>
 		<td>Classe</td>
-		<td>Actions</td>
+		<td>Professeur</td>
 	</tr>
 	<?php
 

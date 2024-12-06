@@ -1,19 +1,31 @@
 <form method="post" action="">
 	<table border="0">
 		<tr>
-			<td> Nom du Professeur :</td>
+			<td>Matière :</td>
 			<td>
 				<input type="text" name="Professeur">
 			</td>
 		</tr>
 		<tr>
-			<td> Nom de la Matière :</td>
+			<td>Nombre d'heures :</td>
 			<td>
 				<input type="text" name="Matière">
 			</td>
 		</tr>
 		<tr>
-			<td> La classe :</td>
+			<td>Coeff :</td>
+			<td>
+				<input type="text" name="Classe">
+			</td>
+		</tr>
+		<tr>
+			<td>Classe :</td>
+			<td>
+				<input type="text" name="Classe">
+			</td>
+		</tr>
+		<tr>
+			<td>Professeur :</td>
 			<td>
 				<input type="text" name="Classe">
 			</td>

@@ -15,25 +15,21 @@ if (isset($_POST['Valider'])) {
 		$errors['email'] = "L'email est obligatoire.";
 	}
 	if (empty($_POST['idclasse'])) {
-		$errors['email'] = "La classe est obligatoire.";
+		$errors['idclasse'] = "La classe est obligatoire.";
 	}
 	
 	try {
 		// Si pas d'erreurs, traiter les données
 		if (empty($errors)) {
 			echo "Formulaire soumis avec succès !";
-			// echo "<pre>";
-			// print_r($_POST); // Affiche les données
-			// echo "</pre>";
-			insertEtudiant($_POST); // Exemple d'appel à une fonction d'insertion
+			insertEtudiant($_POST);
 	
 			// Redirection pour éviter la resoumission
-			header("Location: $parametres_URL");
-			exit; // Stopper l'exécution
+			header("Location: $URL_actuelle");
+			exit();
 		}
 	} catch (Exception $e) {
 		echo 'Erreur innatendue.';
-		// echo 'Erreur innatendue : <br>' . $e;
 	}
 }
 ?>
@@ -64,7 +60,18 @@ if (isset($_POST['Valider'])) {
 		<tr>
             <td>Classe :</td>
             <td>
-                <input type="number" name="idclasse" value="<?php echo htmlspecialchars($_POST['idclasse'] ?? ''); ?>">
+                <select name="idclasse">
+                    <option value="">-- Choisir une classe --</option>
+                    <?php foreach ($Classes as $Classe) {
+                        if (isset($_POST['idclasse']) && $_POST['idclasse'] == $Classe['idclasse']) {
+                            echo '<option value="'. $Classe['idclasse'] .'" selected>'. $Classe['nom'] .'</option>';
+                        }
+                        else {
+                            echo '<option value="'. $Classe['idclasse'] .'">'. $Classe['nom'] .'</option>';
+                        }
+                    }
+                    ?>
+                </select>
                 <span style="color:red;"><?php echo $errors['idclasse'] ?? ''; ?></span>
             </td>
         </tr>

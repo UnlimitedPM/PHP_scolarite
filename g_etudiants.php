@@ -1,15 +1,17 @@
- <h3> Gestion des étudiants</h3>
+ <h3>Gestion des étudiants</h3>
 
  <?php
+	$Classes = selectAllClasses();
+
 	require_once ("vues/etudiants/vue_insert.php");
 
  	if (isset($_POST['Rechercher']))
  	{
  		$mot = $_POST['mot'];
- 		$Clients = searchClients($mot); 
+ 		$Etudiants = searchClients($mot); 
  	}
  	else{
- 		$Clients = selectAllEtudiants();
+ 		$Etudiants = selectAllEtudiants();
  	}
 
  	require_once ("vues/etudiants/vue.php");

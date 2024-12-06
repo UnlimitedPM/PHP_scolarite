@@ -1,17 +1,20 @@
-<h3> Gestion des enseignement </h3>
+<h3>Gestion des enseignements</h3>
+
 <?php
-if(isset($_SESSION['email']) and $_SESSION['role'] == "admin")
-{
-	$lesClients = selectAllClients(); 
+   $Classes = selectAllClasses();
 
- 	require_once ("vues/vue_insert_enseignement.php");
+   require_once ("vues/enseignements/vue_insert.php");
 
- 	if (isset($_POST['Valider']))
- 	{
- 		insertVehicule($_POST); 
- 	}
-}
- 	$lesVehicules = selectAllVehicules(); 
+	if (isset($_POST['Rechercher']))
+	{
+		$mot = $_POST['mot'];
+		$Etudiants = searchClients($mot); 
+	}
+	else{
+		$Etudiants = selectAllEtudiants();
+	}
 
- 	require_once ("vues/vue_enseignement.php");
- ?>
+	require_once ("vues/enseignements/vue.php");
+?>
+
+
