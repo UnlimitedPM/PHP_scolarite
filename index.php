@@ -81,7 +81,7 @@
 			}
 			switch ($page) {
 				case 0 : require_once("home.php"); break;
-				case 1 : require_once("g_clients.php"); break;
+				case 1 : require_once("g_professeurs.php"); break;
 				case 2 : require_once("g_classes.php"); break;
 				case 3 : require_once("g_enseignement.php"); break;
 				case 4 : session_destroy(); header("Location: index.php"); break;

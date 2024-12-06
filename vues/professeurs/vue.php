@@ -1,14 +1,14 @@
 <?php
 // Si on post les modifications.
 if (isset($_POST['validation_update'])) {
-	updateEtudiant($_POST);
+	updateProfesseur($_POST);
 
 	// Redirection pour éviter la resoumission
 	header("Location: " . $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING']);
 	exit();
 }
 if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == "delete") {
-	deleteEtudiant($_GET['id']);
+	deleteProfesseur($_GET['id']);
 
 	// // Redirection pour éviter la resoumission
 	header("Location: $URL_actuelle");
@@ -16,7 +16,7 @@ if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == "delete")
 }
 ?>
 
-<h4>Liste des étudiants</h4>
+<h4>Liste des professeurs</h4>
 
 <br/>
 
@@ -24,25 +24,23 @@ if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == "delete")
 	<tr>
 		<td>Nom</td>
 		<td>Prénom</td>
-		<td>Email</td>
-		<td>Classe</td>
+		<td>Diplome</td>
 		<td>Actions</td>
 	</tr>
 	<?php
 
-	function afficherLigneEtudiant($Etudiant, $URL_actuelle) {
+	function afficherLigneProfesseur($Professeur, $URL_actuelle) {
 		echo "<tr>";
-		echo "<td>".$Etudiant['nom']."</td>";
-		echo "<td>".$Etudiant['prenom']."</td>";
-		echo "<td>".$Etudiant['email']."</td>";
-		echo "<td>".$Etudiant['nom_classe']."</td>";
+		echo "<td>".$Professeur['nom']."</td>";
+		echo "<td>".$Professeur['prenom']."</td>";
+		echo "<td>".$Professeur['diplome']."</td>";
 
 		echo 
 		"<td>
-			<a href='index.php{$URL_actuelle}&action=delete&id={$Etudiant['idetudiant']}'>
+			<a href='index.php{$URL_actuelle}&action=delete&id={$Professeur['idprofesseur']}'>
 				<i class='fa-solid fa-trash' style='font-size:50px;'></i>
 			</a>
-			<a href='index.php{$URL_actuelle}&action=update&id={$Etudiant['idetudiant']}'>
+			<a href='index.php{$URL_actuelle}&action=update&id={$Professeur['idprofesseur']}'>
 				<i class='fa-solid fa-pen-to-square' style='font-size:50px;'></i>
 			</a>
 		</td>";
@@ -50,28 +48,18 @@ if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == "delete")
 		echo "</tr>";
 	}
 
-	foreach ($Etudiants as $Etudiant) {
+	foreach ($Professeurs as $Professeur) {
 		if (isset($_GET['action']) && isset($_GET['id'])) {
 			// Si on veut modifier et que l'id est égale à celui de l'objet Etudiant en question.
-			if ($_GET['action'] == "update" && $_GET['id'] == $Etudiant['idetudiant']) {
+			if ($_GET['action'] == "update" && $_GET['id'] == $Professeur['idprofesseur']) {
 				echo "
 					<tr>
 					<form action='' method='post'>
-					<td style='display:none'><input type='text' name='idetudiant_update' value=".$Etudiant['idetudiant']." required/></td>
-					<td><input type='text' name='nom_update' value=".$Etudiant['nom']." required/></td>
-					<td><input type='text' name='prenom_update' value=".$Etudiant['prenom']." required/></td>
-					<td><input type='email' name='email_update' value=".$Etudiant['email']." required/></td>
-					<td><select name='idclasse_update'>
+					<td style='display:none'><input type='text' name='idprofesseur_update' value=".$Professeur['idprofesseur']." required/></td>
+					<td><input type='text' name='nom_update' value=".$Professeur['nom']." required/></td>
+					<td><input type='text' name='prenom_update' value=".$Professeur['prenom']." required/></td>
+					<td><input type='diplome' name='diplome_update' value=".$Professeur['diplome']." required/></td>
 				";
-					foreach ($Classes as $Classe) {
-						if ($Etudiant['nom_classe'] == $Classe['nom']) {
-							echo '<option value="'. $Classe['idclasse'] .'" selected>'. $Classe['nom'] .'</option>';
-						}
-						else {
-							echo '<option value="'. $Classe['idclasse'] .'">'. $Classe['nom'] .'</option>';
-						}
-					}
-                echo "</select></td>";
 				?>
 					<td>
 						<button type="submit" name="validation_update" class="submit-button">
@@ -87,12 +75,12 @@ if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == "delete")
 			}
 			// Si on veut modifier et que l'id n'est pas égale à celui de l'objet Etudiant en question.
 			else {
-				afficherLigneEtudiant($Etudiant, $URL_actuelle);
+				afficherLigneProfesseur($Professeur, $URL_actuelle);
 			}
 		}
 		// Rendu de base.
 		else {
-			afficherLigneEtudiant($Etudiant, $URL_actuelle);
+			afficherLigneProfesseur($Professeur, $URL_actuelle);
 		}
 	}
 
